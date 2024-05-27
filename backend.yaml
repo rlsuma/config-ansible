@@ -15,8 +15,8 @@
 
   - name: install nodejs
     ansible.builtin.dnf:
-     name: "{{ item }}"
-     state: installed 
+      name: "{{ item }}"
+      state: installed 
     loop:
     - nodejs
     - mysql 
@@ -71,4 +71,4 @@
 
   - name: daemon reload
     ansible.builtin.systemd_services:
-     daemon_reload: true
+      daemon_reload: true
