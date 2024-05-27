@@ -4,7 +4,7 @@
   vars:
    login_host: db.rlsu.shop
   tasks: 
-  - name: install mysql server
+  - name: install MYSQL server
     ansible.builtin.dnf:
       name: mysql-server
       state: latest
