@@ -1,2 +1,8 @@
 [db]
 db.rlsu.shop
+
+[backend]
+backend.rlsu.shop
+
+[frontend]
+frontend.rlsu.shop
