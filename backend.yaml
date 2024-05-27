@@ -20,3 +20,4 @@
   - name: create expense user
    ansible.builtin.user:
     name: expense 
+    ignore_errors: yes
