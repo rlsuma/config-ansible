@@ -2,36 +2,35 @@
   hosts: db
   become: yes
   vars:
-   login_host: db.rlsu.shop
+    login_host: db.daws78s.online
   vars_prompt:
   - name: mysql_root_password
     prompt: please enter MySQL root password
     private: no
-
-  tasks: 
-  - name: install MYSQL server
+  tasks:
+  - name: Install MySQL Server
     ansible.builtin.dnf:
       name: mysql-server
       state: latest
- 
-  - name: start and Enable MYSQL server
+
+  - name: Start and Enable MySQL server
     ansible.builtin.service:
       name: mysqld
       state: started
-      enables: yes
+      enabled: yes
 
   - name: install python mysql dependencies
     ansible.builtin.pip:
-      name: 
+      name:
       - PyMySQL
       - cryptography
-      executable: pip3.9
+      executable: pip3.9 # pip3.11 if python version is 3.11
 
-
-  - name: check DB connection 
+  # check password is already setup or not
+  - name: check DB connection
     community.mysql.mysql_info:
-      login _user: root
-      login _password: "{{ mysql_root_password }}"
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
       login_host: "{{ login_host }}"
       filter: version
     ignore_errors: yes
@@ -39,9 +38,8 @@
 
   - name: print output
     ansible.builtin.debug:
-      msg: "output:  {{ mysql_connection_output }}"
-
+      msg: "Output: {{mysql_connection_output}} "
 
   - name: setup root password
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
-    when: mysql_connection_output.failed is true # don't give {{ }} in when condition 
+    when: mysql_connection_output.failed is true # don't give {{ }} in when condition
