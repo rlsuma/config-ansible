@@ -1,5 +1,5 @@
--name: configure DB server
-  host: db
+- name: configure DB server
+  hosts: db
   become: yes
   vars:
    login_host: db.rlsu.shop
